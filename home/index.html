@@ -3,13 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My first Vue page</title>
+    <title>Personal Profile Web page</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Vue Example</h1>
     <div id="app">
-      {{ message }}
+      <h1>{{ title }}</h1>
+      
+      <div class="grid-container">
+        <div class="grid-item">{{ section1 }}</div>
+        <div class="grid-item">{{ section2 }}</div>
+        <div class="grid-item">{{ section3 }}</div>
+        <div class="grid-item">{{ section4 }}</div>
+        <div class="grid-item">{{ section5 }}</div>
+        <div class="grid-item">{{ section6 }}</div>
+        <div class="grid-item full-width">{{ section7 }}</div>
+      </div>
+
+      <footer>{{ footer }}</footer>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
