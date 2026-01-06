@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+#app {
+  display: inline-block;
+  padding: 10px;
+  font-size: x-large;
+  background-color: lightgreen;
+  border-radius: 5px;
+  margin-top: 10px;
+}
