@@ -15,5 +15,19 @@
   </head>
   <body>
     <h1>Vue Example</h1>
+    <div id="app">
+      {{ message }}
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+      createApp({
+        data() {
+          return {
+            message: 'Hello World!'
+          }
+        }
+      }).mount('#app');
+    </script>
   </body>
 </html>
