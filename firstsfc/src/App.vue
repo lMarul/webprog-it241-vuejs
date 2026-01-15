@@ -4,22 +4,10 @@ import FoodItem from './components/FoodItem.vue'
 
 const foods = ref([
   {
-    name: 'Santol',
-    description: 'A tropical fruit with a sweet and sour taste, perfect for summer!',
-    emoji: '🍑',
-    rating: 5
-  },
-  {
     name: 'Mango',
     description: 'The king of fruits! Sweet, juicy, and absolutely delicious.',
     emoji: '🥭',
     rating: 5
-  },
-  {
-    name: 'Sushi',
-    description: 'Fresh, flavorful, and beautifully presented Japanese cuisine.',
-    emoji: '🍣',
-    rating: 4
   },
   {
     name: 'Pizza',
