@@ -1,11 +1,10 @@
-<script setup></script>
+<script setup>
+import FoodItem from './components/FoodItem.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <h1>My Food App</h1>
+  <FoodItem />
 </template>
 
 <style scoped></style>
