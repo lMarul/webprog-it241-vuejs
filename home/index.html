@@ -17,7 +17,12 @@
         <div class="grid-item">{{ section4 }}</div>
         <div class="grid-item">{{ section5 }}</div>
         <div class="grid-item">{{ section6 }}</div>
-        <div class="grid-item full-width">{{ section7 }}</div>
+        <div class="grid-item full-width">
+          <h2>{{ section7 }}</h2>
+          <div class="image-gallery">
+            <img v-for="food in manyFoods" :src="food" :key="food" alt="Food Image">
+          </div>
+        </div>
       </div>
 
       <footer>{{ footer }}</footer>
