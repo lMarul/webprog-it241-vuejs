@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import PersonalProfile from './components/PersonalProfile.vue'
 import FoodItem from './components/FoodItem.vue'
 import FoodItem2 from './components/FoodItem2.vue'
 
@@ -45,10 +46,12 @@ const simpleFoods = ref([
 <template>
   <div class="app-container">
     <header class="app-header">
-      <h1>🍽️ My Favorite Foods</h1>
+      <h1>🍽️ Personal Profile and Fruits</h1>
       <p class="subtitle">Discover and save your favorite dishes</p>
     </header>
     
+    <PersonalProfile />
+
     <div class="food-grid">
       <FoodItem
         v-for="(food, index) in foods"
