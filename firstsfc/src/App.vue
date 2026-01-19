@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import FoodItem from './components/FoodItem.vue'
+import FoodItem2 from './components/FoodItem2.vue'
 
 const foods = ref([
   {
@@ -28,6 +29,17 @@ const foods = ref([
     rating: 5
   }
 ])
+
+const simpleFoods = ref([
+  {
+    title: 'Santol and Mango',
+    message: 'I like santol and mango'
+  },
+  {
+    title: 'Durian',
+    message: 'I like durian'
+  }
+])
 </script>
 
 <template>
@@ -45,6 +57,15 @@ const foods = ref([
         :description="food.description"
         :emoji="food.emoji"
         :rating="food.rating"
+      />
+    </div>
+
+    <div class="simple-food-grid">
+      <FoodItem2
+        v-for="(food, index) in simpleFoods"
+        :key="index"
+        :title="food.title"
+        :message="food.message"
       />
     </div>
     
@@ -117,6 +138,15 @@ body {
   animation: fadeInUp 0.8s ease 0.2s both;
 }
 
+.simple-food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 3rem auto 0;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -141,7 +171,8 @@ body {
     font-size: 2.5rem;
   }
   
-  .food-grid {
+  .food-grid,
+  .simple-food-grid {
     grid-template-columns: 1fr;
   }
 }
