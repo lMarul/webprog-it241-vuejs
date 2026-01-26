@@ -1,80 +1,67 @@
 <script setup>
-import { ref } from 'vue'
-import PersonalProfile from './components/PersonalProfile.vue'
-import FoodItem from './components/FoodItem.vue'
-import FoodItem2 from './components/FoodItem2.vue'
+import { ref, onMounted } from 'vue'
+import { supabase } from './lib/supabaseClient'
 
-const foods = ref([
-  {
-    name: 'Mango',
-    description: 'The king of fruits! Sweet, juicy, and absolutely delicious.',
-    emoji: '🥭',
-    rating: 5
-  },
-  {
-    name: 'Pizza',
-    description: 'Classic comfort food with endless topping possibilities.',
-    emoji: '🍕',
-    rating: 5
-  },
-  {
-    name: 'Ramen',
-    description: 'Rich, savory noodle soup that warms the soul.',
-    emoji: '🍜',
-    rating: 4
-  },
-  {
-    name: 'Ice Cream',
-    description: 'Sweet, creamy, and the perfect treat any time of day!',
-    emoji: '🍨',
-    rating: 5
-  }
-])
+const instruments = ref([])
+const loading = ref(true)
+const error = ref(null)
 
-const simpleFoods = ref([
-  {
-    title: 'Santol and Mango',
-    message: 'I like santol and mango'
-  },
-  {
-    title: 'Durian',
-    message: 'I like durian'
+async function getInstruments() {
+  try {
+    loading.value = true
+    const { data, error: fetchError } = await supabase.from('instruments').select()
+    
+    if (fetchError) {
+      error.value = fetchError.message
+      console.error('Error fetching instruments:', fetchError)
+    } else {
+      instruments.value = data
+      console.log('Fetched instruments:', data)
+    }
+  } catch (err) {
+    error.value = err.message
+    console.error('Error:', err)
+  } finally {
+    loading.value = false
   }
-])
+}
+
+onMounted(() => {
+  getInstruments()
+})
 </script>
 
 <template>
-  <div class="app-container">
-    <header class="app-header">
-      <h1>🍽️ Personal Profile and Fruits</h1>
-      <p class="subtitle">Discover and save your favorite dishes</p>
-    </header>
+  <div style="padding: 20px; font-family: Arial, sans-serif;">
+    <h1 style="color: white;">Instruments List</h1>
     
-    <PersonalProfile />
-
-    <div class="food-grid">
-      <FoodItem
-        v-for="(food, index) in foods"
-        :key="index"
-        :name="food.name"
-        :description="food.description"
-        :emoji="food.emoji"
-        :rating="food.rating"
-      />
-    </div>
-
-    <div class="simple-food-grid">
-      <FoodItem2
-        v-for="(food, index) in simpleFoods"
-        :key="index"
-        :title="food.title"
-        :message="food.message"
-      />
+    <div v-if="loading">Loading instruments...</div>
+    
+    <div v-else-if="error" style="color: red; background: #fee; padding: 15px; border-radius: 5px; margin: 10px 0;">
+      <strong>Error:</strong> {{ error }}
+      <p style="margin-top: 10px; font-size: 14px;">
+        <strong>Troubleshooting tips:</strong><br>
+        1. Check if the "instruments" table exists in your Supabase database<br>
+        2. Check if Row Level Security (RLS) is enabled - if yes, you need to add a policy<br>
+        3. Verify your Supabase URL and anon key in the .env file
+      </p>
     </div>
     
-    <footer class="app-footer">
-      <p>Built with ❤️ using Vue.js</p>
-    </footer>
+    <div v-else-if="instruments && instruments.length > 0">
+      <ul style="list-style: none; padding: 0;">
+        <li v-for="instrument in instruments" :key="instrument.id" 
+            style="padding: 10px; margin: 5px 0; background: #f0f0f0; border-radius: 5px; color: black;">
+          {{ instrument.name }}
+        </li>
+      </ul>
+    </div>
+    
+    <div v-else style="background: #fff3cd; padding: 15px; border-radius: 5px;">
+      <strong>⚠️ No instruments found in the database.</strong>
+      <p style="margin-top: 10px;">
+        The table exists but is empty. Try adding some data to your "instruments" table in Supabase.
+      </p>
+    </div>
   </div>
 </template>
 
