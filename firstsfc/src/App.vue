@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { supabase } from './lib/supabaseClient'
+import RestAPI from './components/RestAPI.vue'
 
 const instruments = ref([])
 const loading = ref(true)
@@ -271,6 +272,9 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <!-- RestAPI Component -->
+    <RestAPI />
   </div>
 </template>
 
